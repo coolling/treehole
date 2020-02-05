@@ -1,0 +1,85 @@
+#userIds,
+#passwords {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #707070;
+  border-radius: 38px;
+  opacity: 0.65;
+  width: 338px;
+  height: 65px;
+  letter-spacing: 0;
+  margin: 8px;
+
+  text-align: center;
+  display: flex;
+  align-items: center;
+  outline-style: none
+}
+#userId p,
+#password p {
+  position: relative;
+  left: 35px;
+  font-size: 18px;
+  font-family: Source Han Sans CN;
+  font-weight: normal;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  opacity: 1;
+  top:65px
+}
+#userId input,
+#password input{
+  font-size: 18px;
+  font-family: Source Han Sans CN;
+  font-weight: normal;
+}
+.login {
+  background-image: url("../img/loginbgi.png");
+  min-height: 800px;
+  background-repeat: no-repeat;
+ 
+ background-size: 140% 110%;
+}
+.logintu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 140px;
+}
+.loginform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 50px;
+}
+.loginbutton {
+  background: #323232 0% 0% no-repeat padding-box;
+  border-radius: 33px;
+  opacity: 1;
+  width: 184px;
+  height: 65px;
+  border: 1px solid #323232;
+  letter-spacing: 0;
+  color: #ffffff;
+  opacity: 1;
+  font-family: Source Han Sans CN;
+  font-weight: normal;
+  font-size: 18px;
+  outline: none;
+}
+.buttonbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top:-100px
+}
+#password {
+  position: relative;
+  top: -130px;
+}
+#userId{
+  position: relative;
+  top: -60px;
+}

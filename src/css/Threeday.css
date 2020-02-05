@@ -1,0 +1,11 @@
+.mywords {
+    border: 1px solid black;
+    width: 80%;
+    height: 200px;
+  }
+  .dayaboutme {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+  }
+  

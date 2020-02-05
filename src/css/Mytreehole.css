@@ -1,0 +1,51 @@
+.home {
+    height: 800px;
+    width: 100%;
+    display: flex;
+    background-image: url("../img/tree.png");
+    flex-direction: column;
+  
+    background-repeat: no-repeat;
+    background-position: -440px -70px;
+  }
+  
+  .Mytreeholehome {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    width: 60%;
+    justify-content: center;
+    align-content: space-around;
+    position: relative;
+    top: 85px;
+    left: 230px;
+  }
+  .check {
+    height: 33%;
+  }
+  .checks {
+    text-decoration: none;
+    font-family: Source Han Sans CN;
+  
+    font-size: 16px;
+    letter-spacing: 0;
+    color: #e4e4e4;
+    opacity: 1;
+  }
+  .backtohome {
+    position: relative;
+    width: 50px;
+    top: 20px;
+    left: 30px;
+    padding: 0px;
+  }
+  .aaimg {
+    display: flex;
+    justify-content: fixed-end;
+    -webkit-justify-content: flex-end;
+    width: 80%;
+    position: relative;
+    top: -80px;
+    left: 100px;
+  }
+  

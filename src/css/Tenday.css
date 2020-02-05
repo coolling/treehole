@@ -1,0 +1,40 @@
+.zans {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 40px;
+  }
+  .zancount {
+    font-size: 20px;
+  }
+  .dzan {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    margin-right: 35px;
+  }
+  .zans2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 25px;
+  }
+  .dzan p {
+    letter-spacing: 0;
+    color: #4b4d48;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: lighter;
+    font-family: Source Han Sans CN;
+    position: relative;
+    top: 3px;
+    left: 4px;
+  }
+  .tenxin{
+    position: relative;
+    top: 3px;
+    margin-left:15px ;
+  }
+  
