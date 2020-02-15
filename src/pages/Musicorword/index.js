@@ -80,8 +80,8 @@ class Musicorword extends Component {
               return {
                 type: 1,
                 bgi:
-                  "http://lizhuodong.xyz:8380/" +
-                  dates.data.imgUrl.substring(2),
+                  "http://39.102.32.144:8080/" +
+                  dates.data.imgUrl,
                 word: dates.data.content
               };
             });
