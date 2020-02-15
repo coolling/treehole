@@ -25,6 +25,22 @@ class Musicorword extends Component {
       visible: false
     };
   }
+  tanwindow6 = (text1, text2) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2" style={{ marginRight: "24%" }}>
+          <div className="tanwindow2p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.handleCancel}>{text2}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
   componentDidMount() {
     var type = url.parse(this.props.location.search, true).query.type;
     console.log(type);
@@ -88,11 +104,7 @@ class Musicorword extends Component {
       })
       .catch(err => console.log(err));
   }
-  handleOk = () => {
-    this.setState({
-      visible: false
-    });
-  };
+
   handleCancel = () => {
     this.setState({
       visible: false
@@ -123,6 +135,9 @@ class Musicorword extends Component {
           backgroundPosition: "center center"
         }}
       >
+        {this.state.visible
+          ? this.tanwindow6("跳转似乎失败了请返回重试", "好的")
+          : null}
         <Link to="./Index" className="backtohome">
           {" "}
           <img src={back} alt="返回"></img>
@@ -139,12 +154,10 @@ class Musicorword extends Component {
         <div className="content">
           {this.state.type === 2 ? (
             <img
-              src={
-                "http://lizhuodong.xyz:8380/" +
-                this.state.mugicwordimg.substring(2)
-              }
+              src={"http://39.102.32.144:8080/" + this.state.mugicwordimg}
               alt="歌词"
               width="80%"
+              height="400px"
             ></img>
           ) : (
             <div className="sendsomewords">
@@ -155,13 +168,16 @@ class Musicorword extends Component {
         {this.state.type === 2 ? (
           <div>
             <audio
-              src={
-                "http://lizhuodong.xyz:8380/" + this.state.musicsrc.substring(2)
-              }
+              src={"http://39.102.32.144:8080/" + this.state.musicsrc}
               id="autoplay"
             ></audio>
             <div className="playmusic">
-              <img src={music} alt="歌" className="ge"></img>
+              <img
+                src={music}
+                alt="歌"
+                className="ge"
+                style={{ overflow: "hidden" }}
+              ></img>
               <p>{this.state.musicName}</p>
               <div className="startorpause">
                 <img
@@ -175,19 +191,6 @@ class Musicorword extends Component {
         ) : (
           <div className="nulls"></div>
         )}
-        <Modal
-          title="蛋糕！请求好像出现了一些错误嘤嘤嘤，请小可爱谅解啦再刷新一下或重新登陆试试看吧"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          wrapClassName="tanbox"
-          onCancel={this.handleCancel}
-          okText="唉，成吧"
-          cancelText="好的吧"
-          closable={false}
-          centered
-        >
-          <hr></hr>
-        </Modal>
       </div>
     );
   }

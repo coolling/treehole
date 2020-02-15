@@ -8,6 +8,12 @@
     top: -65px;
     min-height: 700px;
   }
+  .allwordss .mywords{
+    height: 236px;
+  }
+  .allwordss .feelp{
+    height: 150px;
+  }
   .othershead {
     display: flex;
     flex-direction: row;

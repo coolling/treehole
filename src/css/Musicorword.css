@@ -2,13 +2,13 @@
     width: 100%;
   
     display: flex;
-    min-height: 480px;
+    min-height: 580px;
     justify-content: center;
     position: relative;
     top: -100px;
   }
   audio {
-    margin: 10px;
+  height: 0px;
     width: 100%;
   }
   .sendsomewords {
@@ -55,11 +55,11 @@
     font-size: 16px;
     font-weight: 320;
     position: relative;
-    left: -30px;
+    left: -100px;
   }
   .ge {
     position: relative;
-    left: -12px;
+    left: -52px;
   }
   .startorpause {
    position: fixed;

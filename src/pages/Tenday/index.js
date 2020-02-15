@@ -18,7 +18,10 @@ class Tenday extends Component {
       timeLimit: 1,
       afterzan: zanafter,
       content: [],
-      visible: false
+      visible: false,
+      deleteid: "",
+      deletekey: "",
+      visible2: false
     };
   }
 
@@ -65,19 +68,62 @@ class Tenday extends Component {
         if (dates.code !== 0) {
           if (dates.code < 0) {
             this.setState({
-              visible: true
+              visible2: true
             });
           }
         }
       })
       .catch(err => console.log(err));
-    
   };
-  delete = key => {
+  tanwindow6 = (text1, text2) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2" style={{ marginRight: "24%" }}>
+          <div className="tanwindow2p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.handleCancel6}>{text2}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  tanwindow5 = (text1, text2, text3) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2" style={{ marginRight: "24%" }}>
+          <div className="tanwindow5p1">
+            <p>{text1}</p>
+          </div>
+          <hr style={{ margin: "0" }} />
+          <div style={{ display: "flex" }}>
+            <span
+              className="tanwindow5p2"
+              style={{ borderRight: "1px solid #c2c2c2" }}
+            >
+              <p onClick={this.handleCancel}>{text2}</p>
+            </span>
+
+            <span className="tanwindow5p2">
+              <p onClick={this.delete.bind(this)}>{text3}</p>
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  delete = () => {
+    this.setState({
+      visible: false
+    });
     var newlist = this.state.content;
     var aurl = "/login/delectMyfeelingServlet";
 
-    aurl = aurl + "?feelingId=" + newlist[key].feelingId;
+    aurl = aurl + "?feelingId=" + this.state.deleteid;
 
     fetch(aurl, {
       method: "POST",
@@ -96,29 +142,31 @@ class Tenday extends Component {
         return res.json();
       })
       .then(dates => {
+        console.log(dates);
+        
         if (dates.code !== 0) {
           if (dates.code < 0) {
             this.setState({
-              visible: true
+              visible2: true
             });
           }
         }
       })
       .catch(err => console.log(err));
-    newlist.splice(key, 1);
+    newlist.splice(this.state.deletekey, 1);
     this.setState({
       content: newlist
     });
-    
   };
-  handleOk = () => {
+
+  handleCancel = () => {
     this.setState({
       visible: false
     });
   };
-  handleCancel = () => {
+  handleCancel6 = () => {
     this.setState({
-      visible: false
+      visible2: false
     });
   };
   componentDidMount() {
@@ -146,7 +194,7 @@ class Tenday extends Component {
         if (dates.code !== 0) {
           if (dates.code < 0) {
             this.setState({
-              visible: true
+              visible2: true
             });
           }
         } else {
@@ -160,26 +208,53 @@ class Tenday extends Component {
         }
       })
       .catch(err => console.log(err));
-   
   }
-  time=(e)=>{
-    if(e[4]!=='年'){
-      
-   var date =new Date(e);
-   var time=date.toLocaleTimeString();
-   if(date.toLocaleTimeString().substring(0,4)==='上午12'){
-     time='上午0'+time.substring(4)
-   }
-   return date.getFullYear() +
-   "年" +
-   (date.getMonth() + 1) +
-   "月" +
-   date.getDate() +
-   "日" +
-   time}
-   else{
-     return e
-   }}
+  time = e => {
+    if (e[4] !== "年") {
+      var date = new Date(e);
+      var time = date.toLocaleTimeString();
+      if (date.toLocaleTimeString().substring(0, 4) === "上午12") {
+        time = "上午0" + time.substring(4);
+      }
+      var date2 = new Date();
+      var str =
+        date2.getFullYear() +
+        "年" +
+        (date2.getMonth() + 1) +
+        "月" +
+        date2.getDate() +
+        "日";
+      if (
+        str ===
+        date.getFullYear() +
+          "年" +
+          (date.getMonth() + 1) +
+          "月" +
+          date.getDate() +
+          "日"
+      ) {
+        return time;
+      }
+      return (
+        date.getFullYear() +
+        "年" +
+        (date.getMonth() + 1) +
+        "月" +
+        date.getDate() +
+        "日" +
+        time
+      );
+    } else {
+      return e;
+    }
+  };
+  showtan = key => {
+    this.setState({
+      visible: true,
+      deleteid: this.state.content[key].feelingId,
+      deletekey: key
+    });
+  };
   render() {
     return (
       <div
@@ -188,68 +263,78 @@ class Tenday extends Component {
           backgroundImage: `url(${bgi})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundSize: "100% 100%"
+          backgroundSize: "120% 100%"
         }}
       >
+        {this.state.visible2
+          ? this.tanwindow6("跳转似乎失败了请返回重试", "好的")
+          : null}
+        {this.state.visible
+          ? this.tanwindow5("是否删除？", "取消", "确定")
+          : null}
         <Link to="./Mytreehole" className="backtohome">
           <img src={back} alt="返回"></img>
         </Link>
         <div className="aaimg">
-        <img
-              className="wordsshudong"
-              src={shudong}
-              alt="树洞"
-              width="150px"
-              height="160px"
-            ></img>
+          <img
+            className="wordsshudong"
+            src={shudong}
+            alt="树洞"
+            width="150px"
+            height="160px"
+          ></img>
         </div>
-
         <div className="allwords">
           {(this.state.content || []).map((value, key) => {
             return (
               <div key={key} className="boxbox">
                 <div className="mywords">
-                  <div className='feelp'>
+                  <div className="feelp">
                     <p>{value.feelContent}</p>
                   </div>
 
-                  <div className="feeltime">
+                  <div className="feeltime" style={{ top: "0px" }}>
                     <p>{this.time(value.feUpdateTime)}</p>
                   </div>
-                </div>
-                <div className="zans2">
-                  <img
-                    onClick={this.delete.bind(this, key)}
-                    src={deletes}
-                    alt="删除"
-                    width="25px"
-                    height="25px"
-                  />
-                  <div className="dzan">
+                  <hr style={{ top: "5px" }} />
+                  <div className="zans2">
                     <img
-                      src={
-                        value.ifSupport === "点赞"
-                          ? this.state.afterzan
-                          : this.state.zansrc
-                      }
-                      alt="赞"
-                      onClick={this.zan.bind(this, key)}
-                      width="25px"
-                      height="25px"
+                      onClick={this.showtan.bind(this, key)}
+                      src={deletes}
+                      alt="删除"
+                      width="22px"
+                      height="22px"
                     />
-                    <p className="zancount">{value.supportCount}</p>
-                    <Link
-                      to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}`}
-                    >
+                    <div className="dzan" style={{ marginRight: "15px" }}>
                       <img
-                        src={xin}
-                        alt="评论"
-                        width="25px"
-                        height="25px"
-                        className="tenxin"
+                        src={
+                          value.ifSupport === "点赞"
+                            ? this.state.afterzan
+                            : this.state.zansrc
+                        }
+                        alt="赞"
+                        onClick={this.zan.bind(this, key)}
+                        width="22px"
+                        height="22px"
                       />
-                    </Link>
-                    <p className="commentCount">{value.commentCount}</p>
+                      <p className="zancount">{value.supportCount}</p>
+                      <Link
+                        to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}
+                      &feUpdateTime=${value.feUpdateTime}&ifSupport=${value.ifSupport}&supportCount=${value.supportCount}
+                      &commentCount=${value.commentCount}
+                      `}
+                      >
+                        <img
+                          src={xin}
+                          alt="评论"
+                          width="22px"
+                          height="22px"
+                          className="tenxin"
+                          style={{ marginLeft: "40px" }}
+                        />
+                      </Link>
+                      <p className="commentCount">{value.commentCount}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -257,19 +342,6 @@ class Tenday extends Component {
           })}
         </div>
         <div className="null"></div>
-        <Modal
-          title="蛋糕！请求好像出现了一些错误嘤嘤嘤，请小可爱谅解啦再刷新一下或重新登陆试试看吧"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          wrapClassName="tanbox"
-          onCancel={this.handleCancel}
-          okText="唉，成吧"
-          cancelText="好的吧"
-          closable={false}
-          centered
-        >
-          <hr></hr>
-        </Modal>
       </div>
     );
   }

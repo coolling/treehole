@@ -2,7 +2,7 @@
   "name": "treehole",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://lizhuodong.xyz:8380",
+  "proxy": "http://39.102.32.144:8080",
   "dependencies": {
     "antd": "^3.26.0",
     "axios": "^0.19.0",

@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import "../../css/Index.css";
-import url from "url";
-import axios from "axios";
 import Background from "../../img/shu2.jpg";
-import head from "../../img/headimg.png";
 import lovebefore from "../../img/beforelove.png";
 import loveafter from "../../img/afterlove.png";
 import familybefore from "../../img/beforefamily.png";
@@ -14,7 +11,6 @@ import studyafter from "../../img/afterstudy.png";
 import otherbefore from "../../img/beforeother.png";
 import otherafter from "../../img/afterother.png";
 import shudong from "../../img/shudong.png";
-import { Modal } from "antd";
 
 class Index extends Component {
   constructor(props) {
@@ -32,22 +28,81 @@ class Index extends Component {
       choosedtag: "",
       isprivate: "",
       visible1: false,
-      head: head
+      head: "",
+      visible2: false,
+      visible3: false
     };
   }
-  handleOk1 = () => {
-    this.setState({
-      visible1: false
-    });
+  tanwindow2 = (text1, text2) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2">
+          <div className="tanwindow2p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.handleCancel}>{text2}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  tanwindow3 = (text1, text2) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2">
+          <div className="tanwindow3p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.handleCancel1}>{text2}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  tanwindow4 = (text1, text2, text3) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow4text2">
+          <div className="tanwindow3p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.Cancel}>{text2}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.Ok}>{text3}</p>
+          </div>
+        </div>
+      </div>
+    );
   };
   handleCancel1 = () => {
     this.setState({
       visible1: false
     });
   };
-  handleOk = e => {
+  handleCancel = () => {
     this.setState({
       visible: false
+    });
+  };
+  handleCancel6 = () => {
+    this.setState({
+      visible3: false
+    });
+  };
+  Ok = e => {
+    this.setState({
+      visible2: false
     });
     var aurl = "/login/shareTodayServlet";
     aurl += "?content=" + this.state.mood + "&ifPrivate=1";
@@ -71,6 +126,10 @@ class Index extends Component {
 
         if (dates.code < 0) {
           this.setState({
+            visible: true
+          });
+        } else {
+          this.setState({
             visible1: true
           });
         }
@@ -78,19 +137,13 @@ class Index extends Component {
       .catch(pro => console.log(pro));
   };
   componentDidMount = () => {
-    if (url.parse(this.props.location.search, true).query.userphoto) {
-      this.setState({
-        head:
-          "http://lizhuodong.xyz:8380/" +
-          url
-            .parse(this.props.location.search, true)
-            .query.userphoto.substring(2)
-      });
-    }
-  };
-  handleCancel = e => {
     this.setState({
-      visible: false
+      head: "http://39.102.32.144:8080/" + localStorage.getItem("userPhoto")
+    });
+  };
+  Cancel = e => {
+    this.setState({
+      visible2: false
     });
 
     var aurl = "/login/shareTodayServlet";
@@ -111,9 +164,13 @@ class Index extends Component {
       .then(function(res) {
         return res.json();
       })
-      .then(function(dates) {
+      .then(dates => {
         console.log(dates);
         if (dates.code < 0) {
+          this.setState({
+            visible: true
+          });
+        } else {
           this.setState({
             visible1: true
           });
@@ -142,7 +199,7 @@ class Index extends Component {
       });
     } else {
       this.setState({
-        visible: true
+        visible2: true
       });
     }
   };
@@ -164,48 +221,35 @@ class Index extends Component {
     console.log(apicture);
 
     var aurl = "/login/changUserPhotoServlet";
-    //var data = {
-    //file: apicture
-    //};
-    // console.log(data);
+
     const data = new FormData();
-    aurl += "?token=" + localStorage.getItem("token");
-    // data.append("token", localStorage.getItem("token"));
+    aurl += "?userId=" + localStorage.getItem("userId");
+
     data.append("file", apicture);
-    var datas = {
-      token: localStorage.getItem("token")
-    };
-    //axios.post(aurl,data).then(resp=>console.log(resp))
-    console.log(data);
+
     fetch(aurl, {
       method: "POST",
-      headers: {
-        //'Authorization': "Bearer " + localStorage.getItem("token"),
-        "Content-Type": "multipart/form data"
-      },
 
       mode: "cors",
 
       body: data
-
-      // body:apicture
     })
       .then(function(res) {
         return res.json();
       })
-      .then(function(date) {
+      .then(date => {
         console.log(date);
 
         if (date.code < 0) {
           this.setState({
-            visible1: true
+            visible3: true
           });
+        } else {
+          localStorage.setItem("userPhoto", date.data.userPhoto);
+          this.componentDidMount();
         }
       })
       .catch(pro => console.log(pro));
-    var reader = new FileReader();
-    reader.onload = this.showpicture;
-    reader.readAsDataURL(apicture);
   };
   showpicture = e => {
     var apicture = e.target.result;
@@ -213,38 +257,45 @@ class Index extends Component {
     this.setState({
       head: apicture
     });
-    /* var aurl = "/changUserPhotoServlet";
-    var data = {
-      file: apicture
-    };
-    console.log(data);
-    fetch(aurl, {
-      method: "POST",
-      headers: {
-        'Authorization': "Bearer " + localStorage.getItem("token"),
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-
-      mode: "cors",
-
-      body: JSON.stringify({
-        token: localStorage.getItem("token")
-      })
-    })
-      .then(function(res) {
-        return res.json();
-      })
-      .then(function(date) {
-        console.log(date);
-        if (data.code !== 0) {
-          alert(data.message);
-        }
-      })
-      .catch(pro => console.log(pro));*/
+  };
+  tanwindow6 = (text1, text2) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2" style={{ marginRight: "24%" }}>
+          <div className="tanwindow2p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.handleCancel6}>{text2}</p>
+          </div>
+        </div>
+      </div>
+    );
   };
   render() {
     return (
       <Fragment>
+        {this.state.visible
+          ? this.tanwindow2("发布失败了 请稍后重试", "好的")
+          : null}
+        {this.state.visible1
+          ? this.tanwindow3(
+              "发布成功!请继续选择tag可以进入相应的推歌或推文页面哦",
+              "了解 ！"
+            )
+          : null}
+        {this.state.visible2
+          ? this.tanwindow4(
+              "发布后可以共享到世界，也可以 设为仅自己可见，变成自己 一个人的小秘密哦！",
+              "仅自己可见",
+              "匿名分享"
+            )
+          : null}
+        {this.state.visible3
+          ? this.tanwindow6("跳转似乎失败了请返回重试", "好的")
+          : null}
         <div className="head">
           <img
             className="awordsshudong"
@@ -278,49 +329,26 @@ class Index extends Component {
               id="headpicture"
               onChange={this.changhead}
             ></input>
-            <input type="submit" value="a"></input>
           </form>
         </div>
 
-        <Modal
-          title="发布后可以共享到世界，也可以设为仅自己可见，变成自己一个人的小秘密哦！"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          wrapClassName="tanbox"
-          onCancel={this.handleCancel}
-          okText="匿名分享"
-          cancelText="仅自己可见"
-          closable={false}
-          centered
-        >
-          <hr></hr>
-        </Modal>
-        <Modal
-          title="蛋糕！请求好像出现了一些错误嘤嘤嘤，请小可爱谅解啦再刷新一下或重新登陆试试看吧"
-          visible={this.state.visible1}
-          onOk={this.handleOk1}
-          wrapClassName="tanbox"
-          onCancel={this.handleCancel1}
-          okText="唉，成吧"
-          cancelText="好的吧"
-          closable={false}
-          centered
-        >
-          <hr></hr>
-        </Modal>
         <div className="write">
           <textarea
             id="content"
             value={this.state.mood}
             onChange={this.handlemood}
             onFocus={this.click}
-           
           />
         </div>
         <div
           className="footer"
           style={{ backgroundImage: `url(${Background})` }}
         >
+          <div className="alink">
+            <button className="link" onClick={this.blur}>
+              <p>扔进树洞</p>
+            </button>
+          </div>
           <div className="tags">
             {this.state.content.map((value, key) => {
               return (
@@ -346,9 +374,6 @@ class Index extends Component {
                 </div>
               );
             })}
-          </div>
-          <div className="alink">
-            <button className="link" onClick={this.blur}>扔进树洞</button>
           </div>
         </div>
       </Fragment>

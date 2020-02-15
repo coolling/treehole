@@ -7,7 +7,7 @@ import back from "../../img/back.png";
 import shudong from "../../img/shudong.png";
 import zanbefore from "../../img/beforezan.png";
 import zanafter from "../../img/afterzan.png";
-import { Modal } from "antd";
+
 import xin from "../../img/xin.png";
 class Today extends Component {
   constructor(props) {
@@ -20,11 +20,23 @@ class Today extends Component {
       visible: false
     };
   }
-  handleOk = () => {
-    this.setState({
-      visible: false
-    });
+  tanwindow6 = (text1, text2) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2" style={{ marginRight: "24%" }}>
+          <div className="tanwindow2p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.handleCancel}>{text2}</p>
+          </div>
+        </div>
+      </div>
+    );
   };
+
   handleCancel = () => {
     this.setState({
       visible: false
@@ -45,8 +57,7 @@ class Today extends Component {
 
     this.setState({
       content: newlist
-    }); //发送请求
-
+    });
     var aurl = "/login/supportServlet";
     aurl =
       aurl +
@@ -54,7 +65,6 @@ class Today extends Component {
       newlist[key].feelingId +
       "&ifSupport=" +
       (newlist[key].ifSupport === "点赞" ? 1 : 2);
-
     fetch(aurl, {
       method: "POST",
       headers: {
@@ -71,13 +81,12 @@ class Today extends Component {
       .then(function(res) {
         return res.json();
       })
-      .then(dates => {
-        if (dates.code !== 0) {
-          if (dates.code < 0) {
-            this.setState({
-              visible: true
-            });
-          }
+      .then(function(dates) {
+        console.log(dates);
+        if (dates.code < 0) {
+          this.setState({
+            visible: true
+          });
         }
       })
       .catch(err => console.log(err));
@@ -123,24 +132,45 @@ class Today extends Component {
       })
       .catch(err => console.log(err));
   }
-  time=(e)=>{
-    if(e[4]!=='年'){
-      
-   var date =new Date(e);
-   var time=date.toLocaleTimeString();
-   if(date.toLocaleTimeString().substring(0,4)==='上午12'){
-     time='上午0'+time.substring(4)
-   }
-   return date.getFullYear() +
-   "年" +
-   (date.getMonth() + 1) +
-   "月" +
-   date.getDate() +
-   "日" +
-   time}
-   else{
-     return e
-   }}
+  time = e => {
+    if (e[4] !== "年") {
+      var date = new Date(e);
+      var time = date.toLocaleTimeString();
+      if (date.toLocaleTimeString().substring(0, 4) === "上午12") {
+        time = "上午0" + time.substring(4);
+      }
+      var date2 = new Date();
+      var str =
+        date2.getFullYear() +
+        "年" +
+        (date2.getMonth() + 1) +
+        "月" +
+        date2.getDate() +
+        "日";
+      if (
+        str ===
+        date.getFullYear() +
+          "年" +
+          (date.getMonth() + 1) +
+          "月" +
+          date.getDate() +
+          "日"
+      ) {
+        return time;
+      }
+      return (
+        date.getFullYear() +
+        "年" +
+        (date.getMonth() + 1) +
+        "月" +
+        date.getDate() +
+        "日" +
+        time
+      );
+    } else {
+      return e;
+    }
+  };
   render() {
     return (
       <div
@@ -149,21 +179,24 @@ class Today extends Component {
           backgroundImage: `url(${bgi})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundSize: "100% 100%"
+          backgroundSize: "120% 100%"
         }}
       >
+        {this.state.visible
+          ? this.tanwindow6("跳转似乎失败了请返回重试", "好的")
+          : null}
         <Link to="./Mytreehole" className="backtohome">
           {" "}
           <img src={back} alt="返回"></img>
         </Link>
         <div className="aaimg">
-        <img
-              className="wordsshudong"
-              src={shudong}
-              alt="树洞"
-              width="150px"
-              height="160px"
-            ></img>
+          <img
+            className="wordsshudong"
+            src={shudong}
+            alt="树洞"
+            width="150px"
+            height="160px"
+          ></img>
         </div>
 
         <div className="allwords">
@@ -171,60 +204,51 @@ class Today extends Component {
             return (
               <div key={key} className="boxbox">
                 <div className="mywords">
-                  <div className='feelp'>
+                  <div className="feelp">
                     <p>{value.feelContent}</p>
                   </div>
 
                   <div className="feeltime">
                     <p>{this.time(value.feUpdateTime)}</p>
                   </div>
-                </div>
-                <div className="zans">
-                  <div className="dzan">
-                    <img
-                      src={
-                        value.ifSupport === "点赞"
-                          ? this.state.afterzan
-                          : this.state.zansrc
-                      }
-                      alt="赞"
-                      onClick={this.zan.bind(this, key)}
-                      width="25px"
-                      height="25px"
-                    />
-                    <p className="zancount">{value.supportCount}</p>
+                  <hr />
+                  <div className="zans">
+                    <div className="dzan">
+                      <img
+                        src={
+                          value.ifSupport === "点赞"
+                            ? this.state.afterzan
+                            : this.state.zansrc
+                        }
+                        alt="赞"
+                        onClick={this.zan.bind(this, key)}
+                        width="22px"
+                        height="22px"
+                      />
+                      <p className="zancount">{value.supportCount}</p>
+                    </div>
+                    <Link
+                      to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}
+                      &feUpdateTime=${value.feUpdateTime}&ifSupport=${value.ifSupport}&supportCount=${value.supportCount}
+                      &commentCount=${value.commentCount}
+                      `}
+                    >
+                      <img
+                        src={xin}
+                        alt="评论"
+                        width="22px"
+                        height="22px"
+                        className="toxin"
+                      />
+                    </Link>
+                    <p className="commentCount">{value.commentCount}</p>
                   </div>
-                  <Link
-                    to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}`}
-                  >
-                    <img
-                      src={xin}
-                      alt="评论"
-                      width="25px"
-                      height="25px"
-                      className="toxin"
-                    />
-                  </Link>
-                  <p className="commentCount">{value.commentCount}</p>
                 </div>
               </div>
             );
           })}
         </div>
         <div className="null"></div>
-        <Modal
-          title="蛋糕！请求好像出现了一些错误嘤嘤嘤，请小可爱谅解啦再刷新一下或重新登陆试试看吧"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          wrapClassName="tanbox"
-          onCancel={this.handleCancel}
-          okText="唉，成吧"
-          cancelText="好的吧"
-          closable={false}
-          centered
-        >
-          <hr></hr>
-        </Modal>
       </div>
     );
   }

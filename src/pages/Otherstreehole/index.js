@@ -18,9 +18,31 @@ class Otherstreehole extends Component {
       content: [],
       page: 0,
       visible: false,
-      visible1: false
+
+      more: "查看更多"
     };
   }
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    });
+  };
+  tanwindow6 = (text1, text2) => {
+    return (
+      <div className="tanwindow2">
+        <div className="tanwindow2text"></div>
+        <div className="tanwindow2text2" style={{ marginLeft:"15%" ,marginRight:"30%"}}>
+          <div className="tanwindow2p1">
+            <p>{text1}</p>
+          </div>
+          <hr />
+          <div className="tanwindow2p2">
+            <p onClick={this.handleCancel}>{text2}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
   zan = key => {
     var newlist = this.state.content;
     var acount = this.state.content[key].supportCount;
@@ -98,8 +120,8 @@ class Otherstreehole extends Component {
       })
       .then(dates => {
         this.setState({
-          page:this.state.page+1
-        })
+          page: this.state.page + 1
+        });
         console.log(dates);
         if (dates.code !== 0) {
           if (dates.code < 0) {
@@ -116,28 +138,10 @@ class Otherstreehole extends Component {
             });
           });
         }
-      }).catch(err=>console.log(err));
+      })
+      .catch(err => console.log(err));
   }
-  handleOk = () => {
-    this.setState({
-      visible: false
-    });
-  };
-  handleCancel = () => {
-    this.setState({
-      visible: false
-    });
-  };
-  handleOk1 = () => {
-    this.setState({
-      visible1: false
-    });
-  };
-  handleCancel1 = () => {
-    this.setState({
-      visible1: false
-    });
-  };
+
   more = () => {
     var headers = new Headers();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
@@ -162,10 +166,11 @@ class Otherstreehole extends Component {
       .then(dates => {
         console.log(dates);
         if (dates.code !== 0) {
-          if(dates.code<0){
+          if (dates.code < 0) {
             this.setState({
-              visible:true
-            })}
+              visible: true
+            });
+          }
         } else {
           (dates.data || []).map((value, key) => {
             this.state.content.push(value);
@@ -174,31 +179,53 @@ class Otherstreehole extends Component {
             });
           });
         }
-        if(dates.message==="目前尚无人发言"){
+        if (dates.message === "目前尚无人发言") {
           this.setState({
-            visible1:true
-          })
+            more: "已经到底了哦~~"
+          });
         }
-      }).catch(err=>console.log(err));
+      })
+      .catch(err => console.log(err));
   };
-  time=(e)=>{
-    if(e[4]!=='年'){
-      
-   var date =new Date(e);
-   var time=date.toLocaleTimeString();
-   if(date.toLocaleTimeString().substring(0,4)==='上午12'){
-     time='上午0'+time.substring(4)
-   }
-   return date.getFullYear() +
-   "年" +
-   (date.getMonth() + 1) +
-   "月" +
-   date.getDate() +
-   "日" +
-   time}
-   else{
-     return e
-   }}
+  time = e => {
+    if (e[4] !== "年") {
+      var date = new Date(e);
+      var time = date.toLocaleTimeString();
+      if (date.toLocaleTimeString().substring(0, 4) === "上午12") {
+        time = "上午0" + time.substring(4);
+      }
+      var date2 = new Date();
+      var str =
+        date2.getFullYear() +
+        "年" +
+        (date2.getMonth() + 1) +
+        "月" +
+        date2.getDate() +
+        "日";
+      if (
+        str ===
+        date.getFullYear() +
+          "年" +
+          (date.getMonth() + 1) +
+          "月" +
+          date.getDate() +
+          "日"
+      ) {
+        return time;
+      }
+      return (
+        date.getFullYear() +
+        "年" +
+        (date.getMonth() + 1) +
+        "月" +
+        date.getDate() +
+        "日" +
+        time
+      );
+    } else {
+      return e;
+    }
+  };
   render() {
     return (
       <div
@@ -209,35 +236,38 @@ class Otherstreehole extends Component {
           backgroundSize: "120% 100%"
         }}
       >
+        {this.state.visible
+          ? this.tanwindow6("跳转似乎失败了请返回重试", "好的")
+          : null}
         <div className="othershead">
           <Link to="./Mytreehole" className="backtohome">
             <img src={back} alt="返回"></img>{" "}
           </Link>
           <div className="aaimg">
-        <img
+            <img
               className="mywordsshudong"
               src={shudong}
               alt="树洞"
               width="150px"
               height="160px"
             ></img>
-        </div>
+          </div>
         </div>
 
         <div className="allwordss">
           {(this.state.content || []).map((value, key) => {
             return (
               <div key={key} className="boxbox">
-               <div className="mywords">
-                  <div className='feelp'>
+                <div className="mywords">
+                  <div className="feelp">
                     <p>{value.feelContent}</p>
                   </div>
 
-                  <div className="feeltime">
+                  <div className="feeltime" style={{ top: "0px" }}>
                     <p>{this.time(value.feUpdateTime)}</p>
                   </div>
-                </div>
-                <div className="dzan">
+                  <hr style={{ top: "5px" }} />
+                  <div className="dzan" style={{ marginRight: "15px" }}>
                     <img
                       src={
                         value.ifSupport === "点赞"
@@ -246,56 +276,35 @@ class Otherstreehole extends Component {
                       }
                       alt="赞"
                       onClick={this.zan.bind(this, key)}
-                      width="25px"
-                      height="25px"
+                      width="22px"
+                      height="22px"
                     />
                     <p className="zancount">{value.supportCount}</p>
                     <Link
-                      to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}`}
+                      to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}
+                      &feUpdateTime=${value.feUpdateTime}&ifSupport=${value.ifSupport}&supportCount=${value.supportCount}
+                      &commentCount=${value.commentCount}
+                      `}
                     >
                       <img
                         src={xin}
                         alt="评论"
-                        width="25px"
-                        height="25px"
+                        width="22px"
+                        height="22px"
                         className="tenxin"
+                        style={{ marginLeft: "35px" }}
                       />
                     </Link>
                     <p className="commentCount">{value.commentCount}</p>
                   </div>
+                </div>
               </div>
             );
           })}
           <div className="more" onClick={this.more}>
-            <p>查看更多</p>
+            <p>{this.state.more}</p>
           </div>
         </div>
-        <Modal
-          title="蛋糕！请求好像出现了一些错误嘤嘤嘤，请小可爱谅解啦再刷新一下或重新登陆试试看吧"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          wrapClassName="tanbox"
-          onCancel={this.handleCancel}
-          okText="唉，成吧"
-          cancelText="好的吧"
-          closable={false}
-          centered
-        >
-          <hr></hr>
-        </Modal>
-        <Modal
-          title="嘤嘤嘤所有心情都看完了哇没有更多心情了呦，不如小可爱也往树洞里发一条吧"
-          visible={this.state.visible1}
-          onOk={this.handleOk1}
-          wrapClassName="tanbox"
-          onCancel={this.handleCancel1}
-          okText="那我就发一条吧"
-          cancelText="好的吧"
-          closable={false}
-          centered
-        >
-          <hr></hr>
-        </Modal>
       </div>
     );
   }

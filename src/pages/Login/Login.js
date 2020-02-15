@@ -2,16 +2,25 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "../../css/Login.css";
 import shudong from "../../img/shudong1.png";
-import { Modal } from "antd";
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       islogin: false,
-      visible: false,
-      userPhoto:''
+      visible: false
     };
   }
+  tanwindow1 = text => {
+    return (
+      <div onClick={this.handleCancel} className="tanwindow1">
+        <div className="tanwindow1text"></div>
+        <div className="tanwindow1text2">
+          <p>{text}</p>
+        </div>
+      </div>
+    );
+  };
   login = () => {
     var login = false;
     var headers = new Headers();
@@ -35,25 +44,20 @@ class Login extends Component {
         if (data.code === 0) {
           login = true;
           this.setState({
-            islogin: login,
-            userPhoto: data.data.userPhoto
+            islogin: login
           });
           localStorage.setItem("token", data.data.token);
-        localStorage.setItem("userPhoto", data.data.userPhoto);
+          localStorage.setItem("userPhoto", data.data.userPhoto);
+          localStorage.setItem("userId", data.data.userId);
         } else {
           this.setState({
             visible: true
           });
         }
-        
       })
       .catch(err => console.log(err));
   };
-  handleOk = () => {
-    this.setState({
-      visible: false
-    });
-  };
+
   handleCancel = () => {
     this.setState({
       visible: false
@@ -61,11 +65,10 @@ class Login extends Component {
   };
   render() {
     return this.state.islogin === true ? (
-      <Redirect to={`/Index?userphoto=${
-        this.state.userPhoto
-      }`}></Redirect>
+      <Redirect to="/Index"></Redirect>
     ) : (
       <div className="login">
+        {this.state.visible ? this.tanwindow1("登陆失败！请稍后重试") : null}
         <div className="logintu">
           <img
             className="loginshudong"
@@ -88,19 +91,7 @@ class Login extends Component {
               <p>密码</p>
               <input id="passwords" type="password"></input>
             </div>
-            <Modal
-              title="登陆失败啦!请小可爱仔细检查一下账号密码是否正确，记得要注意大小写呦！"
-              visible={this.state.visible}
-              onOk={this.handleOk}
-              wrapClassName="tanbox"
-              onCancel={this.handleCancel}
-              okText="嘤嘤嘤马上检查一下"
-              cancelText="好滴"
-              closable={false}
-              centered
-            >
-              <hr></hr>
-            </Modal>
+
             <br></br>
             <div className="buttonbox">
               <input

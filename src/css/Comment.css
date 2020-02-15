@@ -1,96 +1,134 @@
 .acontent {
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border-radius: 5px;
-    opacity: 0.85;
-    width: 82%;
-    height: 236px;
-    padding: 15px;
-  }
-  .acontent p {
-    letter-spacing: 0;
-    color: #8b8787;
-    opacity: 1;
-  
-    font-family: Source Han Sans CN;
-    font-weight: normal;
-    font-size: 16px;
-  }
-  .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40%;
-    position: relative;
-    top: -100px;
-  }
-  .comment {
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 0.4000000059604645px solid #cacaca;
-    border-radius: 5px 5px 0px 0px;
-    opacity: 0.85;
-    width: 82%;
-    height: 84px;
-    padding: 0px 15px;
-    margin-bottom: 1px;
-    overflow: scroll;
-  }
-  .makeacomment {
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border-radius: 5px;
-    opacity: 0.85;
-    width: 65%;
-    border: 1px solid #ffffff;
-  }
-  .sendcomment {
-    background: #1592e6 0% 0% no-repeat padding-box;
-    border-radius: 5px;
-    opacity: 1;
-    font-weight: Light;
-    font-family: Source Han Sans CN;
-    font-size: 14px;
-    letter-spacing: 0;
-    color: #ffffff;
-    width: 80px;
-    height: 40px;
-    margin: 5px;
-  }
-  
-  .commentbox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    width: 100%;
-    position: relative;
-    top: -30px;
-    min-height: 230px;
-  }
-  .commentboxs {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .null {
-    height: 550px;
-  }
-  .comment p {
-    letter-spacing: 0;
-    color: #000000;
-    opacity: 1;
-    font-family: Source Han Sans CN;
-    font-weight: 340;
-    font-size: 15px;
-    position: relative;
-    top: 10px;
-  }
-  .commentp p {
-    letter-spacing: 0;
-    color: #aeaeae;
-    opacity: 1;
-    font-family: Source Han Sans CN;
-    font-weight: 350;
-    font-size: 12px;
-  }
-  
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  opacity: 0.85;
+  width: 82%;
+  height: 236px;
+  padding: 15px;
+}
+.acontent p {
+  letter-spacing: 0;
+  color: #8b8787;
+  opacity: 1;
+
+  font-family: Source Han Sans CN;
+  font-weight: normal;
+  font-size: 16px;
+}
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40%;
+  position: relative;
+  top: -100px;
+}
+.comment {
+
+  width: 100%;
+  position: relative;
+  top: -30px;
+}
+.makeacomment {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  opacity: 0.85;
+  width: 70%;
+  border: 1px solid #ffffff;
+}
+.sendcomment {
+  background: #1592e6 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  opacity: 1;
+  font-weight: Light;
+  font-family: Source Han Sans CN;
+  font-size: 14px;
+  letter-spacing: 0;
+  color: #ffffff;
+  width: 75px;
+  height: 40px;
+  margin: 5px;
+  border-color: #1592e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.commentbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 0.4000000059604645px solid #cacaca;
+  border-radius: 5px 5px 0px 0px;
+  opacity: 0.85;
+  width: 84%;
+  position: relative;
+  top: -90px;
+  left: 5.5%;
+  height: 390px;
+  overflow: scroll;
+  padding: 10px;
+  padding-top: 30px;
+}
+.commentboxs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -50px;
+}
+
+.comment p {
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+  font-family: Source Han Sans CN;
+  font-weight: 340;
+  font-size: 15px;
+  position: relative;
+  top: 10px;
+}
+
+.acontentp {
+  height: 160px;
+  overflow: scroll;
+}
+.acontent .feeltime {
+  position: relative;
+  top: -5px;
+ 
+}
+.acontent hr {
+  position: relative;
+  top: -20px;
+  opacity: 0.3;
+  border-color: #CACACA;
+}
+.acontent .zans {
+  position: relative;
+  top: -40px;
+}
+.commentp2 p {
+  text-align: left;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+  font-weight: 80px;
+  font-family: Source Han Sans CN;
+  font-size: 15px;
+}
+.commentp p{
+  letter-spacing: 0;
+color: #AEAEAE;
+opacity: 1;
+font-size: 12px;
+}
+.comment hr{
+  opacity: 0.3;
+  border-color: #CACACA;
+}
+.commentp{
+  margin-bottom: 25px;
+}

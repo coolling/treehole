@@ -33,12 +33,12 @@ class Mytreehole extends Component {
             </div>
 
             <div className="check">
-              <Link to={`/Threeday?timeLimit=${3}`}  className="checks">
+              <Link to={`/Threeday?timeLimit=${3}`} className="checks">
                 近三天的小可爱
               </Link>
             </div>
             <div className="check">
-              <Link to={`/Tenday?timeLimit=${10}`}  className="checks">
+              <Link to={`/Tenday?timeLimit=${10}`} className="checks">
                 近十天的me
               </Link>
             </div>
