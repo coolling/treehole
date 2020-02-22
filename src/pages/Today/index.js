@@ -194,8 +194,8 @@ class Today extends Component {
             className="wordsshudong"
             src={shudong}
             alt="树洞"
-            width="150px"
-            height="160px"
+            width="80px"
+            height="50px"
           ></img>
         </div>
 

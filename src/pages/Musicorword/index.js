@@ -88,9 +88,9 @@ class Musicorword extends Component {
           } else {
             this.setState({
               type: 2,
-              bgi: bgi,
+              bgi: "http://39.102.32.144:8080/" + dates.data.imgUrl,
               musicsrc: dates.data.musicUrl,
-              mugicwordimg: dates.data.imgUrl,
+              
               musicName: dates.data.musicName
             });
           }
@@ -132,7 +132,8 @@ class Musicorword extends Component {
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundSize: " cover",
-          backgroundPosition: "center center"
+          backgroundPosition: "center center",
+          overflow:"hidden"
         }}
       >
         {this.state.visible
@@ -147,19 +148,12 @@ class Musicorword extends Component {
             className="wordsshudong"
             src={shudong}
             alt="树洞"
-            width="150px"
-            height="160px"
+            width="80px"
+            height="50px"
           ></img>
         </div>
         <div className="content">
-          {this.state.type === 2 ? (
-            <img
-              src={"http://39.102.32.144:8080/" + this.state.mugicwordimg}
-              alt="歌词"
-              width="80%"
-              height="400px"
-            ></img>
-          ) : (
+          {this.state.type === 2 ? null : (
             <div className="sendsomewords">
               <p>{this.state.word}</p>
             </div>

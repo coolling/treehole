@@ -289,8 +289,8 @@ class Comment extends Component {
             className="wordsshudong"
             src={shudong}
             alt="树洞"
-            width="150px"
-            height="160px"
+            width="80px"
+            height="50px"
           ></img>
         </div>
         <div className="box">
@@ -348,6 +348,7 @@ class Comment extends Component {
             );
           })}
         </div>
+        <div className="nulls"></div>
         <div className="commentboxs">
           <textarea
             value={this.state.tip}

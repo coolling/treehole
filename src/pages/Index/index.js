@@ -276,7 +276,7 @@ class Index extends Component {
   };
   render() {
     return (
-      <Fragment>
+      <div className="indexdiv">
         {this.state.visible
           ? this.tanwindow2("发布失败了 请稍后重试", "好的")
           : null}
@@ -301,8 +301,8 @@ class Index extends Component {
             className="awordsshudong"
             src={shudong}
             alt="树洞"
-            width="150px"
-            height="160px"
+            width="80px"
+            height="50px"
           ></img>
 
           <div className="linkwords">
@@ -319,8 +319,7 @@ class Index extends Component {
             src={this.state.head}
             alt="头像"
             id="head"
-            width="44px"
-            height="44px"
+           
           ></img>
           <form id="form">
             <input
@@ -376,7 +375,7 @@ class Index extends Component {
             })}
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }

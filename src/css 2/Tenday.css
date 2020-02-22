@@ -1,0 +1,65 @@
+.zans {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  height: 80px;
+  align-self: flex-end;
+  position: relative;
+  top: 10px;
+
+  width: 100%;
+}
+.zancount {
+  font-size: 20px;
+}
+.dzan {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  margin-right: 35px;
+  width: 100%;
+}
+.zans2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 0px;
+  width: 100%;
+}
+.dzan p {
+  letter-spacing: 0;
+  color: #4b4d48;
+  opacity: 1;
+  font-size: 14px;
+  font-weight: lighter;
+  font-family: Source Han Sans CN;
+  position: relative;
+  top: 3px;
+  left: 4px;
+}
+.tenxin {
+  position: relative;
+  top: 3px;
+  margin-left: 15px;
+}
+.tanwindow5p1 {
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+  padding: 12px;
+}
+.tanwindow5p2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+.tanwindow5p2 p {
+  letter-spacing: 0;
+  color: #3c6bec;
+  opacity: 1;
+  font-size: 14px;
+}

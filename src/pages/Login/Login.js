@@ -49,6 +49,7 @@ class Login extends Component {
           localStorage.setItem("token", data.data.token);
           localStorage.setItem("userPhoto", data.data.userPhoto);
           localStorage.setItem("userId", data.data.userId);
+          
         } else {
           this.setState({
             visible: true
@@ -64,7 +65,7 @@ class Login extends Component {
     });
   };
   render() {
-    return this.state.islogin === true ? (
+    return localStorage.getItem("token") ? (
       <Redirect to="/Index"></Redirect>
     ) : (
       <div className="login">

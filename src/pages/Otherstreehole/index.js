@@ -31,7 +31,10 @@ class Otherstreehole extends Component {
     return (
       <div className="tanwindow2">
         <div className="tanwindow2text"></div>
-        <div className="tanwindow2text2" style={{ marginLeft:"15%" ,marginRight:"30%"}}>
+        <div
+          className="tanwindow2text2"
+          
+        >
           <div className="tanwindow2p1">
             <p>{text1}</p>
           </div>
@@ -248,8 +251,8 @@ class Otherstreehole extends Component {
               className="mywordsshudong"
               src={shudong}
               alt="树洞"
-              width="150px"
-              height="160px"
+              width="80px"
+              height="50px"
             ></img>
           </div>
         </div>
@@ -301,6 +304,7 @@ class Otherstreehole extends Component {
               </div>
             );
           })}
+ 
           <div className="more" onClick={this.more}>
             <p>{this.state.more}</p>
           </div>
