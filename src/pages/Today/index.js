@@ -7,7 +7,7 @@ import back from "../../img/back.png";
 import shudong from "../../img/shudong.png";
 import zanbefore from "../../img/beforezan.png";
 import zanafter from "../../img/afterzan.png";
-
+import {ROOT} from "../../constants"
 import xin from "../../img/xin.png";
 class Today extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class Today extends Component {
     this.setState({
       content: newlist
     });
-    var aurl = "/login/supportServlet";
+    var aurl = ROOT+"/login/supportServlet";
     aurl =
       aurl +
       "?feelingId=" +
@@ -92,7 +92,7 @@ class Today extends Component {
       .catch(err => console.log(err));
   };
   componentDidMount() {
-    var aurl = "/login/viewMyfeelingsServlet";
+    var aurl = ROOT+"/login/viewMyfeelingsServlet";
     aurl +=
       "?timeLimit=" +
       url.parse(this.props.location.search, true).query.timeLimit;
@@ -179,7 +179,9 @@ class Today extends Component {
           backgroundImage: `url(${bgi})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundSize: "120% 100%"
+          backgroundSize: "120% 100%",
+          height:"100%",
+          overflow: "scroll"
         }}
       >
         {this.state.visible
@@ -230,7 +232,7 @@ class Today extends Component {
                     <Link
                       to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}
                       &feUpdateTime=${value.feUpdateTime}&ifSupport=${value.ifSupport}&supportCount=${value.supportCount}
-                      &commentCount=${value.commentCount}
+                      &commentCount=${value.commentCount}&types=one
                       `}
                     >
                       <img

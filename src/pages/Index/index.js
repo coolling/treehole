@@ -11,7 +11,7 @@ import studyafter from "../../img/afterstudy.png";
 import otherbefore from "../../img/beforeother.png";
 import otherafter from "../../img/afterother.png";
 import shudong from "../../img/shudong.png";
-
+import {ROOT} from "../../constants"
 class Index extends Component {
   constructor(props) {
     super(props);
@@ -104,7 +104,7 @@ class Index extends Component {
     this.setState({
       visible2: false
     });
-    var aurl = "/login/shareTodayServlet";
+    var aurl = ROOT+"/login/shareTodayServlet";
     aurl += "?content=" + this.state.mood + "&ifPrivate=1";
 
     fetch(aurl, {
@@ -146,7 +146,7 @@ class Index extends Component {
       visible2: false
     });
 
-    var aurl = "/login/shareTodayServlet";
+    var aurl =ROOT+ "/login/shareTodayServlet";
     aurl += "?content=" + this.state.mood + "&ifPrivate=0";
     fetch(aurl, {
       method: "POST",
@@ -220,7 +220,7 @@ class Index extends Component {
     var apicture = e.target.files[0];
     console.log(apicture);
 
-    var aurl = "/login/changUserPhotoServlet";
+    var aurl = ROOT+"/login/changUserPhotoServlet";
 
     const data = new FormData();
     aurl += "?userId=" + localStorage.getItem("userId");

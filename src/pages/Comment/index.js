@@ -9,6 +9,7 @@ import { Modal } from "antd";
 import xin from "../../img/xin.png";
 import zanbefore from "../../img/beforezan.png";
 import zanafter from "../../img/afterzan.png";
+import {ROOT} from "../../constants"
 class Comment extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +52,7 @@ class Comment extends Component {
       ifSupport: isSupport,
       supportCount: acount
     });
-    var aurl = "/login/supportServlet";
+    var aurl = ROOT+"/login/supportServlet";
     aurl =
       aurl +
       "?feelingId=" +
@@ -127,7 +128,7 @@ class Comment extends Component {
         comment: comments
       });
       var aurl =
-        "/login/commentServlet" +
+      ROOT+ "/login/commentServlet" +
         "?comContent=" +
         tip +
         "&feelingId=" +
@@ -190,7 +191,7 @@ class Comment extends Component {
     var acomments = this.state.comment;
     console.log(url.parse(this.props.location.search, true).query.feelingId);
     var aurl =
-      "/login/viewCommentServlet?feelingId=" +
+      ROOT+"/login/viewCommentServlet?feelingId=" +
       url.parse(this.props.location.search, true).query.feelingId;
     fetch(aurl, {
       method: "POST",
@@ -268,6 +269,7 @@ class Comment extends Component {
     }
   };
   render() {
+    const type=url.parse(this.props.location.search, true).query.types
     return (
       <div
         className="writecomment"
@@ -275,13 +277,15 @@ class Comment extends Component {
           backgroundImage: `url(${bgi})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundSize: "120% 100%"
+          backgroundSize: "120% 100%",
+          height:"100%",
+          overflow: "scroll"
         }}
       >
         {this.state.visible
           ? this.tanwindow6("跳转似乎失败了请返回重试", "好的")
           : null}
-        <Link to="./Mytreehole" className="backtohome">
+        <Link to={type==="other"?("/Otherstreehole"):(type==="one"?(`/Today?timeLimit=${1}`):type==="three"?`/Threeday?timeLimit=${3}`:`/Tenday?timeLimit=${10}`)} className="backtohome">
           <img src={back} alt="返回"></img>
         </Link>
         <div className="aaimg">

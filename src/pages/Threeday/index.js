@@ -9,6 +9,7 @@ import zanbefore from "../../img/beforezan.png";
 import zanafter from "../../img/afterzan.png";
 import { Modal } from "antd";
 import xin from "../../img/xin.png";
+import {ROOT} from "../../constants"
 class Threeday extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +42,7 @@ class Threeday extends Component {
     this.setState({
       content: newlist
     });
-    var aurl = "/login/supportServlet";
+    var aurl = ROOT+"/login/supportServlet";
     aurl =
       aurl +
       "?feelingId=" +
@@ -78,7 +79,7 @@ class Threeday extends Component {
   };
 
   componentDidMount() {
-    var aurl = "/login/viewMyfeelingsServlet";
+    var aurl = ROOT+"/login/viewMyfeelingsServlet";
     aurl +=
       "?timeLimit=" +
       url.parse(this.props.location.search, true).query.timeLimit;
@@ -181,7 +182,9 @@ class Threeday extends Component {
           backgroundImage: `url(${bgi})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundSize: "120% 100%"
+          backgroundSize: "120% 100%",
+          height:"100%",
+          overflow: "scroll"
         }}
       >
         {this.state.visible
@@ -231,7 +234,7 @@ class Threeday extends Component {
                     <Link
                       to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}
                       &feUpdateTime=${value.feUpdateTime}&ifSupport=${value.ifSupport}&supportCount=${value.supportCount}
-                      &commentCount=${value.commentCount}
+                      &commentCount=${value.commentCount}&types=three
                       `}
                     >
                       <img

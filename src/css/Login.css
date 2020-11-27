@@ -1,7 +1,7 @@
 #userIds,
 #passwords {
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
+  border: 0px solid #707070;
   border-radius: 38px;
   opacity: 0.65;
   width: 80%;
@@ -14,16 +14,19 @@
   align-items: center;
   outline-style: none;
 }
+#userIds{
+  margin-bottom: 3%
+}
 #userId p,
 #password p {
   font-size: 18px;
   font-family: Source Han Sans CN;
   font-weight: normal;
   letter-spacing: 0;
-  color: #ffffff;
+  color: #707070;
   opacity: 1;
   position: relative;
-  left: 63px;
+  left: 17%;
 }
 #userId p {
   top: 65px;
@@ -37,12 +40,17 @@ form {
 }
 
 .login {
-  background-image: url("../img/loginbgi.png");
+ 
   min-height: 702px;
   background-repeat: no-repeat;
   position: relative;
   background-size: 140% 110%;
   overflow: hidden;
+  height: 100%;
+  background-color: #E4EDE9
+}
+#root{
+  background-color: #E4EDE9
 }
 .logintu {
   display: flex;

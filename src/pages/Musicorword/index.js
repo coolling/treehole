@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../css/Musicorword.css";
 import bgi from "../../img/musicbgi.png";
-
+import {ROOT} from "../../constants"
 import url from "url";
 import musicwordimg from "../../img/musicword.png";
 import back from "../../img/back.png";
@@ -49,7 +49,7 @@ class Musicorword extends Component {
     });
     var tag = url.parse(this.props.location.search, true).query.tag;
 
-    var aurl = "/login/toTreeHoleServlet";
+    var aurl = ROOT+"/login/toTreeHoleServlet";
     //var headers = new Headers({
 
     //});
@@ -133,7 +133,8 @@ class Musicorword extends Component {
           backgroundAttachment: "fixed",
           backgroundSize: " cover",
           backgroundPosition: "center center",
-          overflow:"hidden"
+          overflow:"hidden",
+          height:"100%"
         }}
       >
         {this.state.visible

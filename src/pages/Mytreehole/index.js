@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../css/Mytreehole.css";
 import back from "../../img/back.png";
 import shudong from "../../img/shudong.png";
+import {ROOT} from "../../constants"
 class Mytreehole extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +28,7 @@ class Mytreehole extends Component {
 
           <div className="Mytreeholehome">
             <div className="check">
-              <Link to={`/Today?timeLimit=${1}`} className="checks">
+              <Link to={`/Today?timeLimit=${1}`} className="checks" id="mytoday">
                 今日自我
               </Link>
             </div>

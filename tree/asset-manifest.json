@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "./static/css/main.795c7621.chunk.css",
+    "main.js": "./static/js/main.513bc503.chunk.js",
+    "main.js.map": "./static/js/main.513bc503.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.353cc09e.js",
+    "runtime-main.js.map": "./static/js/runtime-main.353cc09e.js.map",
+    "static/js/2.be6d7a3a.chunk.js": "./static/js/2.be6d7a3a.chunk.js",
+    "static/js/2.be6d7a3a.chunk.js.map": "./static/js/2.be6d7a3a.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.de6f028be10df8ee471c8c4fe299153c.js": "./precache-manifest.de6f028be10df8ee471c8c4fe299153c.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.795c7621.chunk.css.map": "./static/css/main.795c7621.chunk.css.map",
+    "static/media/bgi.png": "./static/media/bgi.2adf99ad.png",
+    "static/media/musicbgi.png": "./static/media/musicbgi.952c21ab.png",
+    "static/media/musicword.png": "./static/media/musicword.f0e25a67.png",
+    "static/media/mybgi.png": "./static/media/mybgi.768f0f24.png",
+    "static/media/otherbgi.png": "./static/media/otherbgi.e563f611.png",
+    "static/media/shu2.jpg": "./static/media/shu2.3abbdf1e.jpg",
+    "static/media/Mytreehole.css": "./static/media/tree.09527a3d.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.353cc09e.js",
+    "static/js/2.be6d7a3a.chunk.js",
+    "static/css/main.795c7621.chunk.css",
+    "static/js/main.513bc503.chunk.js"
+  ]
+}

@@ -8,6 +8,7 @@ import zanbefore from "../../img/beforezan.png";
 import zanafter from "../../img/afterzan.png";
 import xin from "../../img/xin.png";
 import { Modal } from "antd";
+import {ROOT} from "../../constants"
 class Otherstreehole extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +62,7 @@ class Otherstreehole extends Component {
     this.setState({
       content: newlist
     });
-    var aurl = "/login/supportServlet";
+    var aurl = ROOT+"/login/supportServlet";
     aurl =
       aurl +
       "?feelingId=" +
@@ -103,7 +104,7 @@ class Otherstreehole extends Component {
       });
     }*/
 
-    var aurl = "/login/viewOthersFeelingsServlet";
+    var aurl = ROOT+"/login/viewOthersFeelingsServlet";
     aurl += "?page=" + this.state.page + "&limit=2";
     fetch(aurl, {
       method: "POST",
@@ -148,7 +149,7 @@ class Otherstreehole extends Component {
   more = () => {
     var headers = new Headers();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
-    var aurl = "/login/viewOthersFeelingsServlet";
+    var aurl = ROOT+"/login/viewOthersFeelingsServlet";
     aurl += "?page=" + this.state.page + "&limit=2";
     fetch(aurl, {
       method: "POST",
@@ -236,14 +237,17 @@ class Otherstreehole extends Component {
           backgroundImage: `url(${bgi})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundSize: "120% 100%"
+          backgroundSize: "120% 100%",
+          height:"100%",
+          overflow: "scroll"
         }}
+        
       >
         {this.state.visible
           ? this.tanwindow6("跳转似乎失败了请返回重试", "好的")
           : null}
         <div className="othershead">
-          <Link to="./Mytreehole" className="backtohome">
+          <Link to="./Index" className="backtohome">
             <img src={back} alt="返回"></img>{" "}
           </Link>
           <div className="aaimg">
@@ -286,7 +290,7 @@ class Otherstreehole extends Component {
                     <Link
                       to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}
                       &feUpdateTime=${value.feUpdateTime}&ifSupport=${value.ifSupport}&supportCount=${value.supportCount}
-                      &commentCount=${value.commentCount}
+                      &commentCount=${value.commentCount}&types=other
                       `}
                     >
                       <img

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "../../css/Login.css";
 import shudong from "../../img/shudong1.png";
-
+import {ROOT} from "../../constants"
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,21 +22,22 @@ class Login extends Component {
     );
   };
   login = () => {
+  
     var login = false;
     var headers = new Headers();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
     //  var aurl = "http://106.15.192.117:8080/canteen/login";
-    var aurl = "/login/loginServlet";
-    aurl +=
-      "?userId=" +
-      document.getElementById("userIds").value +
-      "&password=" +
-      document.getElementById("passwords").value;
+    var aurl =ROOT+ "/login/auth/loginServlet";
+   
+    var  a={
+      userId:document.getElementById("userIds").value,
+      password:document.getElementById("passwords").value
+      }
     fetch(aurl, {
       method: "POST",
       headers: headers,
       mode: "cors",
-      body: JSON.stringify()
+      body: JSON.stringify(a)
     })
       .then(res => res.json())
       .then(data => {
@@ -44,12 +45,14 @@ class Login extends Component {
         if (data.code === 0) {
           login = true;
           this.setState({
-            islogin: login
+            islogin: login,
+            userPhoto:data.data.userPhoto
+          },()=>{
+            localStorage.setItem("token", data.data.token);
+            localStorage.setItem("userPhoto", data.data.userPhoto);
+            localStorage.setItem("userId", data.data.userId);
           });
-          localStorage.setItem("token", data.data.token);
-          localStorage.setItem("userPhoto", data.data.userPhoto);
-          localStorage.setItem("userId", data.data.userId);
-          
+         
         } else {
           this.setState({
             visible: true
@@ -65,7 +68,7 @@ class Login extends Component {
     });
   };
   render() {
-    return localStorage.getItem("token") ? (
+    return this.state.islogin ? (
       <Redirect to="/Index"></Redirect>
     ) : (
       <div className="login">

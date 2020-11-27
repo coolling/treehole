@@ -101,7 +101,21 @@ button {
   display: flex;
   flex-direction: row;
   padding: 5px 20px 5px 20px;
-  margin-bottom: 100px;
+  
+}
+html,body,#root{
+  height: 100%;
+  
+}
+#root > div {
+  height: 100%;
+  
+}
+@media screen and (max-height: 720px) {
+  html,body,#root{
+    height: 720px;
+    
+  }
 }
 .tag {
   background: transparent 0% 0% no-repeat padding-box;

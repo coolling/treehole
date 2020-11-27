@@ -9,6 +9,7 @@ import zanbefore from "../../img/beforezan.png";
 import zanafter from "../../img/afterzan.png";
 import deletes from "../../img/delete.png";
 import { Modal } from "antd";
+import {ROOT} from "../../constants"
 import xin from "../../img/xin.png";
 class Tenday extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Tenday extends Component {
     this.setState({
       content: newlist
     });
-    var aurl = "/login/supportServlet";
+    var aurl =ROOT+ "/login/supportServlet";
     aurl =
       aurl +
       "?feelingId=" +
@@ -121,7 +122,7 @@ class Tenday extends Component {
       visible: false
     });
     var newlist = this.state.content;
-    var aurl = "/login/delectMyfeelingServlet";
+    var aurl =ROOT+ "/login/delectMyfeelingServlet";
 
     aurl = aurl + "?feelingId=" + this.state.deleteid;
 
@@ -170,7 +171,7 @@ class Tenday extends Component {
     });
   };
   componentDidMount() {
-    var aurl = "/login/viewMyfeelingsServlet";
+    var aurl = ROOT+"/login/viewMyfeelingsServlet";
     aurl +=
       "?timeLimit=" +
       url.parse(this.props.location.search, true).query.timeLimit;
@@ -263,7 +264,9 @@ class Tenday extends Component {
           backgroundImage: `url(${bgi})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundSize: "120% 100%"
+          backgroundSize: "120% 100%",
+          height:"100%",
+          overflow: "scroll"
         }}
       >
         {this.state.visible2
@@ -321,7 +324,7 @@ class Tenday extends Component {
                       <Link
                         to={`/Comment?feelingId=${value.feelingId}&type=${value.feelContent}
                       &feUpdateTime=${value.feUpdateTime}&ifSupport=${value.ifSupport}&supportCount=${value.supportCount}
-                      &commentCount=${value.commentCount}
+                      &commentCount=${value.commentCount}&types=ten
                       `}
                       >
                         <img

@@ -9,10 +9,83 @@
    
     overflow: hidden;
     background-size: 310% 125%;
+    
     background-position-x: -310px;
     background-position-y: -30px;
+   
   }
+  #mytoday{
+    position: relative;
+    top:5px
+  }
+  @media screen and (min-width: 370px) {
+    .home {
+      height: 700px;
+      width: 100%;
+      display: flex;
+      background-image: url("../img/tree.png");
+      flex-direction: column;
+    
+      background-repeat: no-repeat;
+     
+      overflow: hidden;
+      background-size: 290% 125%;
+      
   
+     
+    }
+  }
+  @media screen and (min-width: 390px) {
+    .home {
+      height: 700px;
+      width: 100%;
+      display: flex;
+      background-image: url("../img/tree.png");
+      flex-direction: column;
+    
+      background-repeat: no-repeat;
+     
+      overflow: hidden;
+      background-size: 295% 125%;
+      
+  
+     
+    }
+  }
+  @media screen and (min-width: 430px) {
+    .home {
+      height: 700px;
+      width: 100%;
+      display: flex;
+      background-image: url("../img/tree.png");
+      flex-direction: column;
+    
+      background-repeat: no-repeat;
+     
+      overflow: hidden;
+      background-size: 275% 125%;
+      
+  
+     
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .home {
+      height: 700px;
+      width: 100%;
+      display: flex;
+      background-image: url("../img/tree.png");
+      flex-direction: column;
+    
+      background-repeat: no-repeat;
+     
+      overflow: hidden;
+      background-size: 325% 125%;
+      
+  
+     
+    }
+  }
   .Mytreeholehome {
     display: flex;
     flex-direction: column;
@@ -22,7 +95,7 @@
     align-content: space-around;
     position: relative;
     top: 170px;
-    left: 200px;
+    left: 55%;
   }
   .check {
     height: 33%;
@@ -51,5 +124,6 @@
     position: relative;
     left: 55px;
     top: -20px;
+    
   }
   
